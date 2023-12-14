@@ -7,20 +7,19 @@
 
 import sys
 import random
-from tree import tree  # {tree art} import statement
+from tree import tree
 from theme import center_text_with_border, centerText, centerText_Bottom_border
 from userInfo import get_user_info, load_last_five_players, save_last_five_players
 
-# ... WORDS
 def choose_word():
     """Selects a random Christmas word or phrase for the puzzle."""
     words = ["JINGLE BELLS", "CHRISTMAS TREE", "SANTA CLAUS", "FROSTY THE SNOWMAN", "HOLIDAY CHEER"]
     return random.choice(words)
 
-# ... VICTORY MESSAGE
-def display_message():
+def display_message(last_five_players, result):
     """Displays a festive holiday message."""
-    tree()  # Call the tree function to print the ASCII art
+    tree()
+
     centered_message = center_text_with_border('''
 Congratulations! You've unlocked a festive holiday message:
 Wishing you a Merry Christmas and a Happy New Year!
@@ -29,11 +28,24 @@ Cheers to a season of love, peace, and good company!
 ''')
     print(centered_message)
 
-# ... MAIN (Play)
+    print("\nLast five players:")
+    for player in last_five_players:
+        result_text = "win" if player["result"] == "win" else "lose"
+        print(f"{player['user_id']}_{player['name']}: {result_text}")
+
+    play_again = input("Do you want to play again? (yes/no): ").lower()
+    if play_again != 'yes' and play_again != 'y':
+        print("Thanks for playing! Goodbye!")
+        sys.exit()
+
+# ... Main(PLay)
 def play_game():
     """Runs the Christmas word puzzle game."""
-    user_data = get_user_info()
     
+    # Load the last five players at the beginning of the function
+    last_five_players = load_last_five_players()
+    
+    user_data = get_user_info()
     
     while True:  # Infinite loop for restarting the game
         word_to_guess = choose_word().upper()
@@ -77,7 +89,7 @@ def play_game():
                         print(centerText("Incorrect guess. Try again!"))
                         attempts -= 1
                 else:
-                    print(centerText("Invalid input. Please enter a valid letter or guess the whole word."))
+                    print(centerText("Invalid input. Please enter a valid letter: "))
 
                 print("Life:", attempts)
                 print("\n")
@@ -85,32 +97,24 @@ def play_game():
 
             except KeyboardInterrupt:
                 print("\nGame interrupted. Goodbye!")
-                return
+                sys.exit()
 
-        if "_" not in guessed_word:
-            display_message()
-        else:
-            print(centerText("SORRY"))
-            print(centerText("GAME OVER!."))
-            print(centerText_Bottom_border(f"The word was: {word_to_guess}"))
-            
-            # Save user data to the last five players list
-        last_five_players = load_last_five_players()
-        last_five_players.append(user_data)
-        if len(last_five_players) > 5:
-            last_five_players.pop(0)  # Keep only the last 5 players
+        result = 'win' if "_" not in guessed_word else 'lose'
+        
+        # Append the current player's result to the last five players list
+        last_five_players.append({"user_id": user_data['user_id'], "name": user_data['name'], "result": result})
+        
+        # Save the updated last five players
         save_last_five_players(last_five_players)
 
         # Display the last five players and the festive holiday message
-        display_message(last_five_players)
-
+        display_message(last_five_players, result)
+        print(f"{user_data['user_id']}_{user_data['name']}")
         play_again = input("Do you want to play again? (yes/no): ").lower()
         if play_again != 'yes' and play_again != 'y':
             print("Thanks for playing! Goodbye!")
             sys.exit()
+        
 
-()
 if __name__ == "__main__":
-    
     play_game()
-
