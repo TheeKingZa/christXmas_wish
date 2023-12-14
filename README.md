@@ -67,7 +67,7 @@
 ---
 
 [^](#index)
-
+---
 ## Notes
 
 - The program uses a list of predefined Christmas words or phrases.
