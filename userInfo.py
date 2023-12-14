@@ -19,7 +19,7 @@ def get_user_info():
     try:
         user_name = input("What's your name? ")
     except KeyboardInterrupt:
-        print(centerText("\n... GameBy_Pule_Mathikha ..."))
+        print(centerText("\n\t\t\t... GameBy_Pule_Mathikha ..."))
         print("\t\t\tGoodBye and Happy Holidays !!!")
         sys.exit()
 

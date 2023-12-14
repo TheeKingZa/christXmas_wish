@@ -13,7 +13,7 @@ from userInfo import get_user_info, load_last_five_players, save_last_five_playe
 
 def choose_word():
     """Selects a random Christmas word or phrase for the puzzle."""
-    words = ["JINGLE BELLS", "CHRISTMAS TREE", "SANTA CLAUS", "FROSTY THE SNOWMAN", "HOLIDAY CHEER"]
+    words = ["JINGLE BELLS", "CHRISTMAS TREE", "SANTA CLAUS", "FROSTY THE SNOWMAN", "HOLIDAY CHEER", "SOFTWARE ENGINEERING"]
     return random.choice(words)
 
 def display_message(last_five_players, result):
@@ -28,15 +28,15 @@ Cheers to a season of love, peace, and good company!
 ''')
     print(centered_message)
 
-    print("\nLast five players:")
+    print("\nLast five players: \n")
     for player in last_five_players:
         result_text = "win" if player["result"] == "win" else "lose"
         print(f"{player['user_id']}_{player['name']}: {result_text}")
 
-    play_again = input("Do you want to play again? (yes/no): ").lower()
-    if play_again != 'yes' and play_again != 'y':
-        print("Thanks for playing! Goodbye!")
-        sys.exit()
+   # play_again = input("Do you want to play again? (yes/no): ").lower()
+   # if play_again != 'yes' and play_again != 'y':
+   #     print("\nThanks for playing! Goodbye!")
+   #     sys.exit()
 
 # ... Main(PLay)
 def play_game():
@@ -62,12 +62,12 @@ def play_game():
 
         while "_" in guessed_word and attempts > 0:
             try:
-                prompt = input(f"{user_data['user_id']}@Enter a letter or guess the whole word: ").upper()
+                prompt = input(f"\n\t{user_data['user_id']}@Enter a letter or guess the whole word: ").upper()
                 
                 guess = prompt
                 
                 if not guess:
-                    print("Empty input. Please enter a valid letter or guess the whole word.")
+                    print("\n\tEmpty input. Please enter a valid letter: ")
                     attempts -= 1
                     continue
 
@@ -96,7 +96,8 @@ def play_game():
                 print(centerText_Bottom_border(" ".join(guessed_word)))
 
             except KeyboardInterrupt:
-                print("\nGame interrupted. Goodbye!")
+                print("\n\n\t\t\t... GameBy_Pule_Mathikha ...")
+                print
                 sys.exit()
 
         result = 'win' if "_" not in guessed_word else 'lose'
@@ -109,10 +110,13 @@ def play_game():
 
         # Display the last five players and the festive holiday message
         display_message(last_five_players, result)
-        print(f"{user_data['user_id']}_{user_data['name']}")
+        print("\n")
+        print(f"\t{user_data['user_id']}_{user_data['name']}")
         play_again = input("Do you want to play again? (yes/no): ").lower()
         if play_again != 'yes' and play_again != 'y':
             print("Thanks for playing! Goodbye!")
+            print("\n\n\t\t\t... GameBy_Pule_Mathikha ...")
+            print("\t\t\tGoodBye and Happy Holidays !!!")
             sys.exit()
         
 
