@@ -1,0 +1,3 @@
+# ignore all the .json
+# they are autoGenarated
+*.json
