@@ -73,7 +73,9 @@ def play_game():
 
                 if len(guess) == 1 and guess.isalpha():
                     if guess in word_to_guess:
-                        print(centerText("Great guess!"))
+                        print("\n")
+                        print(centerText("*** Great guess! = {}***").format(guess))
+                        
                         for i in range(len(word_to_guess)):
                             if word_to_guess[i] == guess:
                                 guessed_word[i] = guess
