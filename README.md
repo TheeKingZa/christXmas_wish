@@ -23,15 +23,13 @@
 ## Description
 
     This is a festive holiday wish program written in Python. 
-    It presents a Christmas word puzzle game where users can guess a randomly selected Christmas word or phrase.
-    The program provides a cheerful holiday message upon successful completion and keeps track of the last five players along with their results.
-
+    
 ## Features
 ```
 - Randomly selects Christmas words or phrases for the puzzle.
-- Allows users to guess individual letters or the entire word.
+- Allows users to guess individual letters to get the word or phase.
 - Displays a festive holiday message upon successful completion.
-- Keeps track of the last five players and their results.
+- Keeps track of the last players and their results.
 - Option to play the game again or exit.
 ```
 ## How to Play
@@ -53,9 +51,10 @@
 ```
 ---
 ## Dependencies
-    ```
+```
     - Python 3.x
-    ```
+    - x = or Higher 
+```
     
 [^](#index)
 
